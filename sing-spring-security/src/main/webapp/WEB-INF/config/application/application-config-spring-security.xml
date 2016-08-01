@@ -16,13 +16,15 @@
 		
 		<security:intercept-url pattern="/basic/**" access="isAuthenticated()"/>
 		<security:intercept-url pattern="/basic2/**" access="hasRole('ROLE_FOO')"/>
+		<security:intercept-url pattern="/json/private/**" access="isAuthenticated()"/>
+		<security:intercept-url pattern="/json/public/**" access="permitAll"/>
 		<security:intercept-url pattern="/loginsuccess" access="isAuthenticated()"/>
 		<security:intercept-url pattern="/**"  access="denyAll" />
 
 		<!-- Login and Logout form -->
 		
 		<security:form-login
-				login-page="/login" 
+				login-page="/login.jsp" 
 				authentication-failure-url="/login?error=true" 
 				default-target-url="/loginsuccess"
 				authentication-success-handler-ref="customAuthenticationSuccessHandler"
@@ -41,7 +43,7 @@
 				logout-url="/logout"
 				/>
 
-		<security:session-management invalid-session-url="/login" >
+		<security:session-management invalid-session-url="/login.jsp" >
 	      	<security:concurrency-control max-sessions="10" error-if-maximum-exceeded="false" />
 	    </security:session-management>
 		
